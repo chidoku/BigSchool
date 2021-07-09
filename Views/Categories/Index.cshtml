@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BigSchool.Models.Course>
+﻿@model IEnumerable<BigSchool.Models.Category>
 
 @{
     ViewBag.Title = "Index";
@@ -13,28 +13,15 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LectureName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Place)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Datetime)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-
         <td>
-            @Html.DisplayFor(modelItem => item.LectureName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Place)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Datetime)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
