@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -79,6 +80,52 @@ namespace BigSchool.Controllers
                 i.LectureName = currentUser.Name;
             }
             return View(courses);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Course course = context.Courses.SingleOrDefault(x => x.Id == id);
+            course.ListCategory = context.Categories.ToList();
+            return View(course);           
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(int id, Course course)
+        {
+            try
+            {
+                context.Entry(course).State = EntityState.Modified;
+                context.SaveChanges();               
+                return RedirectToAction("ListCategory");
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+        public ActionResult Delete(int id)
+        {
+            Course course = context.Courses.SingleOrDefault(x => x.Id == id);
+            course.ListCategory = context.Categories.ToList();
+            return View(course);
+
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Delete(int id, Course course)
+        {
+
+                Course dbDelete = context.Courses.SingleOrDefault(p => p.Id == id);
+                if (dbDelete != null)
+                {
+                    context.Courses.Remove(course);
+                    context.SaveChanges();
+                }
+                return RedirectToAction("ListCategory");
+            
+
         }
     }
 }
