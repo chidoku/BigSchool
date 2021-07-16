@@ -9,9 +9,14 @@ namespace BigSchool.Models
     [Table("Course")]
     public partial class Course
     {
-        public string Name;
 
+        public string Name;
         public string LectureName;
+        public List<Category> ListCategory = new List<Category>();
+
+        public bool isLogin = false;
+        public bool isShowGoing = false;
+        public bool isShowFollow = false;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Course()
@@ -37,7 +42,5 @@ namespace BigSchool.Models
         public virtual ICollection<Attendance> Attendances { get; set; }
 
         public virtual Category Category { get; set; }
-
-        public List<Category> ListCategory = new List<Category>();
     }
 }
